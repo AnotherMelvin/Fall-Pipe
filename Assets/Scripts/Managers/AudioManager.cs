@@ -6,6 +6,8 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
+    
+    [Header("Properties")]
     [SerializeField] private Audio[] sound;
     [SerializeField] private AudioSource[] channel;
 

@@ -149,7 +149,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 494142616}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 6e85c9d2d58d4fc43b644d4300791cdd, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -222,7 +222,7 @@ Transform:
   m_GameObject: {fileID: 494142616}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.106, y: 2.11, z: -0.223}
+  m_LocalPosition: {x: -0.2, y: 2.11, z: -0.223}
   m_LocalScale: {x: 0.218, y: 0.108, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -316,7 +316,7 @@ Transform:
   m_GameObject: {fileID: 705507993}
   serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 10, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -461,8 +461,61 @@ MonoBehaviour:
   sound:
   - name: Metal Pipe
     clip: {fileID: 8300000, guid: 25614da4811865941b58404ea6d2fc97, type: 3}
+  - name: Metal Pipe Light
+    clip: {fileID: 8300000, guid: 387e2b8f900d481479d7b5e9b26f30c2, type: 3}
   channel:
-  - {fileID: 1737824996}
+  - {fileID: 0}
+--- !u!1 &1247599566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1247599567}
+  - component: {fileID: 1247599568}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1247599567
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247599566}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1530843084}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1247599568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247599566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1fdcabd5aa45d346a99ca153731247b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 0
+  threshold:
+  - 1000
+  - 2000
+  - 3000
+  totalSounds: 0
+  pass: 0
 --- !u!1 &1530843083
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,6 +546,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 963517930}
+  - {fileID: 1247599567}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1737824990
@@ -599,13 +653,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1737824990}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.51861304, w: 0.8550091}
-  m_LocalPosition: {x: -0.886, y: 2.398, z: -0.223}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.189, y: 2.43, z: -0.223}
   m_LocalScale: {x: 0.051617842, y: 0.26412076, z: 0.04965314}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -62.479}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1737824995
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -627,12 +681,12 @@ Rigidbody:
     serializedVersion: 2
     m_Bits: 0
   m_ImplicitCom: 1
-  m_ImplicitTensor: 0
+  m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!82 &1737824996
 AudioSource:
   m_ObjectHideFlags: 0
@@ -654,7 +708,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 150038.19
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0

@@ -5,11 +5,16 @@ using UnityEngine;
 
 public class HeightCalculation : MonoBehaviour
 {
+    public static HeightCalculation instance;
     private float yPos;
     private AudioSource src;
 
     void Awake()
     {
+        if (instance == null) {
+            instance = this;
+        }
+
         src = GetComponent<AudioSource>();
         yPos = transform.position.y;
     }
@@ -20,6 +25,10 @@ public class HeightCalculation : MonoBehaviour
             yPos = transform.position.y;
         }
 
-        src.volume = yPos / 3f;
+        src.volume = yPos / (LevelManager.instance.GetLevel() * 3f);
+    }
+
+    public float GetY() {
+        return yPos;
     }
 }
