@@ -12,11 +12,6 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: shelf.001
-    second: {fileID: 2100000, guid: e1ae2a037a1cbde40892f97873be888c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: walls
     second: {fileID: 2100000, guid: 87778f4825ddbd24585447eaa1220363, type: 2}
   materials:

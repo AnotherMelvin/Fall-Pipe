@@ -6,7 +6,7 @@ public class GroundCollision : MonoBehaviour
 {
     private float dTime;
     private bool active;
-    [SerializeField] private bool destroy;
+    private bool destroy;
     private AudioSource src;
     private Rigidbody rb;
 
@@ -20,10 +20,11 @@ public class GroundCollision : MonoBehaviour
     {
         if (active) {
             dTime += Time.deltaTime;
-            destroy = !destroy;
 
-            if (dTime > 4f) {
-                LevelManager.instance.RemoveSound(src.volume * 100);
+            if (dTime < 4f) {
+                LevelManager.instance.RemoveSound(40 * Time.deltaTime);
+            } else {
+                destroy = !destroy;
                 active = !active;
             }
         } 

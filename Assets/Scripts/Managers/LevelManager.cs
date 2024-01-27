@@ -49,7 +49,11 @@ public class LevelManager : MonoBehaviour
     }
 
     public float GetSoundWeight(int i) {
-        return soundWeight[i-1];
+        return soundWeight[i - 1];
+    }
+
+    public float GetTotalSounds() {
+        return totalSounds;
     }
 
     public void AddSound(float x) {
