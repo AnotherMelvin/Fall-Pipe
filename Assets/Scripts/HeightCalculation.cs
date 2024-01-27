@@ -25,7 +25,7 @@ public class HeightCalculation : MonoBehaviour
             yPos = transform.position.y;
         }
 
-        src.volume = yPos / (LevelManager.instance.GetLevel() * 3f);
+        src.volume = yPos / LevelManager.instance.GetSoundWeight(LevelManager.instance.GetLevel());
     }
 
     public float GetY() {

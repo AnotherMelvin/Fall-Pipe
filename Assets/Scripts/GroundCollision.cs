@@ -6,6 +6,7 @@ public class GroundCollision : MonoBehaviour
 {
     private float dTime;
     private bool active;
+    [SerializeField] private bool destroy;
     private AudioSource src;
     private Rigidbody rb;
 
@@ -19,12 +20,21 @@ public class GroundCollision : MonoBehaviour
     {
         if (active) {
             dTime += Time.deltaTime;
+            destroy = !destroy;
 
-            if (dTime > 2.7f) {
+            if (dTime > 4f) {
                 LevelManager.instance.RemoveSound(src.volume * 100);
                 active = !active;
             }
         } 
+
+        if (destroy) {
+            dTime += Time.deltaTime;
+
+            if (dTime > 10f) {
+                Destroy(gameObject);
+            }
+        }
     }
 
     void OnCollisionEnter(Collision other)
@@ -37,8 +47,9 @@ public class GroundCollision : MonoBehaviour
 
             AudioManager.instance.PlayAudioAtIndividualChannel("Metal Pipe", src);
             LevelManager.instance.AddSound(src.volume * 100);
+            LevelManager.instance.DecreaseLives(src.volume);
             active = !active;
-        } else if (dTime < 0.1f) {
+        } else if (!active) {
             AudioManager.instance.PlayAudioAtIndividualChannel("Metal Pipe Light", src);
         }
     }

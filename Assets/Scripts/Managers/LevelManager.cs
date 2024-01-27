@@ -9,9 +9,12 @@ public class LevelManager : MonoBehaviour
     [Header("Properties")]
     [SerializeField] private int level;
     [SerializeField] private float[] threshold;
+    [SerializeField] private float[] soundWeight;
+    [SerializeField] private float[] livesWeight;
 
     [Header("Variables")]
     [SerializeField] private float totalSounds;
+    [SerializeField] private float lives;
 
     [Header("Switch")]
     [SerializeField] private bool pass;
@@ -23,12 +26,17 @@ public class LevelManager : MonoBehaviour
         }
 
         level = 1;
+        lives = 100;
     }
 
     void Update()
     {
         if (totalSounds <= 0) {
             totalSounds = 0;
+        }
+
+        if (lives <= 0) {
+            lives = 0;
         }
 
         if (totalSounds >= threshold[level]) {
@@ -40,11 +48,19 @@ public class LevelManager : MonoBehaviour
         return level;
     }
 
+    public float GetSoundWeight(int i) {
+        return soundWeight[i-1];
+    }
+
     public void AddSound(float x) {
         totalSounds += x;
     }
 
     public void RemoveSound(float x) {
         totalSounds -= x;
+    }
+
+    public void DecreaseLives(float x) {
+        lives -= x * livesWeight[level - 1];
     }
 }
