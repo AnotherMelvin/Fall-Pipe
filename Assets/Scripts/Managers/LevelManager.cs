@@ -39,7 +39,7 @@ public class LevelManager : MonoBehaviour
             lives = 0;
         }
 
-        if (totalSounds >= threshold[level]) {
+        if (totalSounds >= threshold[level - 1]) {
             pass = !pass;
         }
     }
@@ -56,6 +56,14 @@ public class LevelManager : MonoBehaviour
         return totalSounds;
     }
 
+    public float GetLives() {
+        return lives;
+    }
+
+    public bool GetPass() {
+        return pass;
+    }
+
     public void AddSound(float x) {
         totalSounds += x;
     }
@@ -66,5 +74,6 @@ public class LevelManager : MonoBehaviour
 
     public void DecreaseLives(float x) {
         lives -= x * livesWeight[level - 1];
+        UIManager.instance.EnableHurt();
     }
 }
