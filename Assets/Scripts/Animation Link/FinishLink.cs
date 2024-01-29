@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FinishLink : MonoBehaviour
 {
-    public void DisableLink() {
-        UIManager.instance.DisableFinish();
+    public void PlayAudio() {
+        AudioManager.instance.PlayAudioAtChannel("Taco Bell", 0);
     }
 }

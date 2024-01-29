@@ -6,6 +6,9 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
 
+    [Header("References")]
+    [SerializeField] private GameObject door;
+
     [Header("Properties")]
     [SerializeField] private int level;
     [SerializeField] private float[] threshold;
@@ -15,9 +18,11 @@ public class LevelManager : MonoBehaviour
     [Header("Variables")]
     [SerializeField] private float totalSounds;
     [SerializeField] private float lives;
+    private float dTime1, dTime2;
 
     [Header("Switch")]
     [SerializeField] private bool pass;
+    [SerializeField] private bool gameOver;
 
     void Awake()
     {
@@ -37,10 +42,26 @@ public class LevelManager : MonoBehaviour
 
         if (lives <= 0) {
             lives = 0;
+            dTime1 += Time.deltaTime;
+
+            if (dTime1 < 0.018f) {
+                UIManager.instance.EnableGameOver();
+                AudioManager.instance.PlayAudioAtChannel("Yoda", 0);
+                gameOver = true;
+            }
         }
 
         if (totalSounds >= threshold[level - 1]) {
-            pass = !pass;
+            pass = true;
+            gameOver = true;
+        }
+
+        if (pass) {
+            dTime2 += Time.deltaTime;
+
+            if (dTime2 < 0.032f) {
+                UIManager.instance.EnableFinish();
+            }
         }
     }
 
@@ -64,16 +85,24 @@ public class LevelManager : MonoBehaviour
         return pass;
     }
 
+    public bool GetGameOver() {
+        return gameOver;
+    }
+
     public void AddSound(float x) {
         totalSounds += x;
     }
 
     public void RemoveSound(float x) {
-        totalSounds -= x;
+        if (!pass) {
+            totalSounds -= x;
+        }
     }
 
     public void DecreaseLives(float x) {
-        lives -= x * livesWeight[level - 1];
-        UIManager.instance.EnableHurt();
+        if (!gameOver) {
+            lives -= x * livesWeight[level - 1];
+            UIManager.instance.EnableHurt();
+        }
     }
 }

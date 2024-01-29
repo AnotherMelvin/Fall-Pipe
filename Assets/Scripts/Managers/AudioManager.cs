@@ -18,6 +18,12 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        PlayAudioAtChannel("Slip and Fall", 1);
+        PlayAudioAtChannel("Vine Boom", 3);
+    }
+
     public void PlayAudioAtChannel(string clips, int source) {
         channel[source].clip = Array.Find(sound, x => x.name == clips).clip;
         channel[source].Play();

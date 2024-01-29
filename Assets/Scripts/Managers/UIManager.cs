@@ -2,18 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
-    [Header("References")]
+    [Header("Sound Meter")]
     [SerializeField] private Image soundMeter;
+
+    [Header("Health Meter")]
     [SerializeField] private Image healthMeter;
+
+    [Header("Hurt Screen")]
     [SerializeField] private Image hurtScreen;
     [SerializeField] private Animator hurtAnim;
+
+    [Header("Finish Screen")]
     [SerializeField] private Image finishScreen;
     [SerializeField] private Animator finishAnim;
+
+    [Header("Game Over")]
+    [SerializeField] private GameObject gameOver;
 
     [Header("Properties")]
     [SerializeField] private Color[] healthColor;
@@ -28,11 +38,12 @@ public class UIManager : MonoBehaviour
 
         hurtScreen.gameObject.SetActive(false);
         finishScreen.gameObject.SetActive(false);
+        gameOver.SetActive(false);
     }
 
     void Update()
     {
-        soundMeter.fillAmount = 1 - (LevelManager.instance.GetTotalSounds() / 500); 
+        soundMeter.fillAmount = 1 - (LevelManager.instance.GetTotalSounds() / 300); 
         healthMeter.fillAmount = LevelManager.instance.GetLives() / 100;
 
         if (healthMeter.fillAmount <= 0.75f && healthMeter.fillAmount > 0.5f) {
@@ -43,6 +54,14 @@ public class UIManager : MonoBehaviour
             healthMeter.color = healthColor[2];
         } else {
             healthMeter.color = healthColor[3];
+        }
+
+        if (Input.GetKeyDown(KeyCode.R)) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        if (LevelManager.instance.GetGameOver() && !Input.GetKeyDown(KeyCode.R) && Input.anyKey) {
+            SceneManager.LoadScene("menus");
         }
     }
 
@@ -62,7 +81,7 @@ public class UIManager : MonoBehaviour
         finishScreen.gameObject.SetActive(true);
     }
 
-    public void DisableFinish() {
-        finishScreen.gameObject.SetActive(false);
+    public void EnableGameOver() {
+        gameOver.SetActive(true);
     }
 }
