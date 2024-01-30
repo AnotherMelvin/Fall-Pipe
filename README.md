@@ -1,4 +1,4 @@
-Global Game Jam Tangerang 2024 Project
+<h1>Global Game Jam Tangerang 2024 Project</h1>
 
 Theme: Make Me Laugh
 
