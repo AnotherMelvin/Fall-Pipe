@@ -44,7 +44,7 @@ public class LevelManager : MonoBehaviour
             lives = 0;
             dTime1 += Time.deltaTime;
 
-            if (dTime1 < 0.018f) {
+            if (dTime1 < 0.05f) {
                 UIManager.instance.EnableGameOver();
                 AudioManager.instance.PlayAudioAtChannel("Yoda", 0);
                 gameOver = true;
@@ -59,7 +59,7 @@ public class LevelManager : MonoBehaviour
         if (pass) {
             dTime2 += Time.deltaTime;
 
-            if (dTime2 < 0.032f) {
+            if (dTime2 < 0.05f) {
                 UIManager.instance.EnableFinish();
             }
         }

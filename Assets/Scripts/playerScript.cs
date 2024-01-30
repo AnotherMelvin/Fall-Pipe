@@ -74,6 +74,7 @@ public class playerScript : MonoBehaviour
         if (other.gameObject.CompareTag("Bottom")) {
             AudioManager.instance.PlayAudioAtChannel("My Leg", 2);
             CameraShaker.Invoke();
+            UIManager.instance.SetStartTimer();
         }
     }
 }

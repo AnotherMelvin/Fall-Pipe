@@ -11,7 +11,7 @@ public class throwScript : MonoBehaviour
     public int totalThrows;
     public float throwCooldown;
 
-    public KeyCode throwKey = KeyCode.Mouse1;
+    public KeyCode throwKey = KeyCode.Mouse0;
     public float throwForce;
     public float throwUpwardForce;
 
@@ -27,7 +27,7 @@ public class throwScript : MonoBehaviour
 
     void Update()
     {
-        if((Input.GetKeyDown(throwKey) || Input.GetKeyDown(KeyCode.Mouse0)) && readyToThrow && totalThrows > 0 && !LevelManager.instance.GetGameOver())
+        if(Input.GetKeyDown(throwKey) && readyToThrow && totalThrows > 0 && !LevelManager.instance.GetGameOver())
         {
             Throw();
         }
@@ -36,6 +36,7 @@ public class throwScript : MonoBehaviour
     {
         if (Time.time - lastThrowDate > throwCooldown)
         {
+            UIManager.instance.EnableCoolIndicator();
             readyToThrow = false;
             GameObject projectile = Instantiate(objectToThrow, attackPoint.position, cam.rotation);
             Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
